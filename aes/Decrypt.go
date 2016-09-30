@@ -12,9 +12,9 @@ import (
  */
 func Decrypt(cipherData, key []byte) (data []byte, err error) {
 
-    dctLength := base64.URLEncoding.DecodedLen(len(cipherData))
+    dctLength := base64.StdEncoding.DecodedLen(len(cipherData))
     dst := make([]byte, dctLength)
-    _, err = base64.URLEncoding.Decode(dst, cipherData)
+    _, err = base64.StdEncoding.Decode(dst, cipherData)
     if err != nil {
         return
     }

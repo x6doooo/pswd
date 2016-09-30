@@ -4,6 +4,7 @@ import (
     "testing"
     "pswd"
     "bytes"
+    "fmt"
 )
 
 var (
@@ -16,6 +17,8 @@ func TestEncrypt(t *testing.T) {
     if err != nil {
         t.Error(err)
     }
+    //t.Log(string(encryptedData))
+    fmt.Println(string(encryptedData))
     decryptedData, err := Decrypt(encryptedData, key)
     if err != nil {
         t.Error(err)

@@ -2,7 +2,6 @@ package pswd
 
 import (
     "testing"
-    "fmt"
 )
 
 var (

@@ -17,9 +17,9 @@ func Encrypt(data []byte, key []byte) (cipherData []byte, err error) {
     if err != nil {
         return
     }
-    encLength := base64.URLEncoding.EncodedLen(len(encrypted))
+    encLength := base64.StdEncoding.EncodedLen(len(encrypted))
     cipherData = make([]byte, encLength)
-    base64.URLEncoding.Encode(cipherData, encrypted)
+    base64.StdEncoding.Encode(cipherData, encrypted)
     return
 }
 
