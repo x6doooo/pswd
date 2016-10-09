@@ -4,6 +4,7 @@ import (
     "crypto/cipher"
     "crypto/aes"
     "strings"
+    "fmt"
 )
 
 type Token struct {
@@ -28,6 +29,7 @@ func NewToken(key, iv, salt []byte) *Token {
 }
 
 func(me *Token) Encrypt(content []byte) []byte {
+    content = append(me.salt, content...)
     encrypter := cipher.NewCFBEncrypter(me.keyBlock, me.iv)
     encrypted := make([]byte, len(content))
     encrypter.XORKeyStream(encrypted, content)
@@ -38,7 +40,8 @@ func(me *Token) Decrypt(content []byte) []byte {
     decrypter := cipher.NewCFBDecrypter(me.keyBlock, me.iv)
     decrypted := make([]byte, len(content))
     decrypter.XORKeyStream(decrypted, content)
-    if strings.Contains(string(decrypted), string(me.salt)) {
+    fmt.Println(string(decrypted))
+    if strings.Index(string(decrypted), string(me.salt)) == 0 {
         str := strings.Replace(string(decrypted), string(me.salt), "", 1)
         return []byte(str)
     }
