@@ -3,6 +3,7 @@ package pswd
 import (
     "crypto/sha512"
     "golang.org/x/crypto/bcrypt"
+    "encoding/base64"
 )
 
 
@@ -10,10 +11,15 @@ import (
 func sha1password(password, userKey, salt []byte) []byte {
     // step1: step1result = sha512(password)
     password_sha512 := sha512.Sum512(password)
+    //fmt.Println(password_sha512[:])
 
     // step2: step2result = step1result + userKey + salt0
     userKeyAndSalt0 := append(userKey, salt...)
-    return append(password_sha512[:], userKeyAndSalt0...)
+    b := append(password_sha512[:], userKeyAndSalt0...)
+
+    // 再做一次base64处理 以便能够和nodejs的编码统一 可以互相调用加密解密（便于以后替换）
+    str := base64.StdEncoding.EncodeToString(b)
+    return []byte(str)
 }
 
 /*

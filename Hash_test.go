@@ -5,13 +5,17 @@ import (
 )
 
 var (
-    password = []byte("we934093490123Ds")
+    password = []byte("test_password")
     userKey = RandBytes(5)
     salt = RandBytes(10)
     cost = 10
 )
 
 func TestHash(t *testing.T) {
+    //_, e := Hash(password, userKey, salt, cost)
+    //if e != nil {
+    //    t.Error(e)
+    //}
     r0, e := Hash(password, userKey, salt, cost)
     if e != nil {
         t.Error(e)

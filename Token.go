@@ -40,6 +40,7 @@ func(me *Token) Decrypt(content []byte) []byte {
     decrypter := cipher.NewCFBDecrypter(me.keyBlock, me.iv)
     decrypted := make([]byte, len(content))
     decrypter.XORKeyStream(decrypted, content)
+
     fmt.Println(string(decrypted))
     if strings.Index(string(decrypted), string(me.salt)) == 0 {
         str := strings.Replace(string(decrypted), string(me.salt), "", 1)
