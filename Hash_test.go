@@ -20,7 +20,7 @@ func TestHash(t *testing.T) {
     if e != nil {
         t.Error(e)
     }
-    e = Verfiy(password, userKey, salt, r0)
+    e = Verify(password, userKey, salt, r0)
     if e != nil {
         t.Error(e)
     }
@@ -29,7 +29,7 @@ func TestHash(t *testing.T) {
     if e != nil {
         t.Error(e)
     }
-    e = Verfiy(password, userKey, salt, r1)
+    e = Verify(password, userKey, salt, r1)
     if e != nil {
         t.Error(e)
     }
@@ -38,6 +38,6 @@ func TestHash(t *testing.T) {
 func BenchmarkHash(b *testing.B) {
     r0, _ := Hash(password, userKey, salt, cost)
     for i := 0; i < b.N; i++ {
-        Verfiy(password, userKey, salt, r0)
+        Verify(password, userKey, salt, r0)
     }
 }

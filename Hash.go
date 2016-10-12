@@ -51,7 +51,7 @@ func Hash(password, userKey, salt []byte, cost int) (passwordHash []byte, err er
     @return
         error 错误
  */
-func Verfiy(password, userKey, salt, passwordHash []byte) error {
+func Verify(password, userKey, salt, passwordHash []byte) error {
     passwordSha1 := sha1password(password, userKey, salt)
     return bcrypt.CompareHashAndPassword(passwordHash, passwordSha1)
 }
